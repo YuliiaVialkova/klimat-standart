@@ -3,51 +3,125 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 ul,
 ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 img {
-  max-width: 100%;
-  display: block;
+    max-width: 100%;
+    display: block;
 }
 
 /* My styles */
 
 body {
-  font-family: sans-serif;
-  font-size: 14px;
-  line-height: 1.2142;
-  color: #333;
-  background-color: #eeeeee;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.2142;
+    color: #333;
+    background-color: #eeeeee;
+    margin: 0;
+    padding: 0;
 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-  flex: 1;
+    flex: 1;
 }
 
 .container {
-  padding-inline: 15px;
-  margin: 0 auto;
+    padding-inline: 15px;
+    margin: 0 auto;
 }
 
 .container--middle {
-  max-width: 1170px;
+    max-width: 1170px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 
 /* HEADER */
+.header {
+    position: fixed;
+    background-color: #ff5d24;
+    height: 66px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.header__container {
+    height: inherit;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: inherit;
+}
+
+.main-menu__list {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.main-menu__list li a {
+    padding: 25px 30px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+    .main-menu__list li a:hover {
+        background-color: #e52f2f;
+        color: #fff500;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .header__inner {
+        justify-content: center;
+    }
+
+    .header__menu ul {
+        display: flex;
+        align-items: center;
+    }
+
+    .header__logo {
+        display: none;
+    }
+}
+
+/* ABOUT */
+.about {
+    margin-top: 66px;
+}
