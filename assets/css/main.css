@@ -39,6 +39,16 @@ body {
     flex-direction: column;
 }
 
+body.admin-bar .header {
+    top: 32px;
+}
+
+@media (max-width: 768px) {
+    body.admin-bar .header {
+        top: 46px;
+    }
+}
+
 main {
     flex: 1;
 }
