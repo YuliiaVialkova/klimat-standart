@@ -7,9 +7,16 @@
                 <div class="about__container container container--middle">
                     <div class="about__content">
 
-                        <?php $sec_logo = get_field('about_logo');
-                        if ($sec_logo) : ?>
-                            <img src="<?php echo $sec_logo; ?>" alt="Logo Klimat Standart">
+                        <?php
+                        // 1. Отримуємо ID картинки
+                        $logo_id = carbon_get_theme_option('about_logo');
+
+                        // 2. Отримуємо посилання на картинку (в повному розмірі 'full')
+                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
+                        ?>
+
+                        <?php if ($logo_url) : ?>
+                            <img src="<?php echo $logo_url; ?>" alt="About Logo">
                         <?php endif; ?>
 
                         <h2><?php the_field('about_title'); ?></h2>

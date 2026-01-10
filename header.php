@@ -8,14 +8,23 @@
 </head>
 
 <body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
 
     <header class="header">
         <div class="header__container container container--middle">
             <div class="header__inner">
                 <div class="header__logo logo">
-                    <a href="<?php echo home_url(); ?>">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Klimat Standart">
-                    </a>
+                    <?php
+                    if (has_custom_logo()) {
+                        the_custom_logo();
+                    } else {
+                    ?>
+                        <a href="<?php echo home_url(); ?>">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Klimat Standart">
+                        </a>
+                    <?php
+                    }
+                    ?>
                 </div>
 
                 <nav class="header__menu main-menu">
