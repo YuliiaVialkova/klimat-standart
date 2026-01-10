@@ -71,7 +71,7 @@ function crb_register_custom_fields()
 
         ->add_fields(array(
             // Логотип (Зберігає ID картинки)
-            Field::make('image', 'about_logo', 'Логотип секції'),
+            Field::make('image', 'about_logo', 'Логотип'),
 
             // Заголовок
             Field::make('text', 'about_title', 'Заголовок'),
@@ -80,6 +80,6 @@ function crb_register_custom_fields()
             Field::make('rich_text', 'about_text', 'Текст'),
 
             // Велике зображення (Зберігає ID картинки)
-            Field::make('image', 'about_image', 'Зображення секції')
+            Field::make('image', 'about_image', 'Зображення')
         ));
 }
