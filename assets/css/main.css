@@ -25,6 +25,21 @@ img {
 
 /* My styles */
 
+:root {
+    --header-height: 66px;
+    --admin-bar-height: 0px;
+}
+
+body.admin-bar {
+    --admin-bar-height: 46px;
+}
+
+@media (min-width: 782px) {
+    body.admin-bar {
+        --admin-bar-height: 32px;
+    }
+}
+
 body {
     font-family: sans-serif;
     font-size: 14px;
@@ -33,7 +48,6 @@ body {
     background-color: #eeeeee;
     margin: 0;
     padding: 0;
-
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -41,12 +55,6 @@ body {
 
 body.admin-bar .header {
     top: 32px;
-}
-
-@media (max-width: 768px) {
-    body.admin-bar .header {
-        top: 46px;
-    }
 }
 
 main {
@@ -80,8 +88,9 @@ main {
 .header {
     position: sticky;
     background-color: #ff5d24;
-    top: 0;
     z-index: 100;
+    top: var(--admin-bar-height);
+    min-height: var(--header-height);
 }
 
 .header__container {
@@ -93,11 +102,18 @@ main {
     justify-content: space-between;
     align-items: center;
     height: inherit;
+    min-height: var(--header-height);
 }
 
 .header__logo {
-    width: 66px;
-    height: 66px;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.header__logo img {
+    max-height: 66px;
+    width: auto;
 }
 
 .main-menu__list {
@@ -123,17 +139,14 @@ main {
     justify-content: space-between;
 }
 
-.header__menu ul {
-    display: flex;
-    flex-direction: column;
-}
 
 
 
-/* BURGER MENU */
+
+/* BURGER MENU (Mobile Style) */
 .burger {
     display: block;
-    padding: 8px;
+    padding: 0px;
     border: 1px solid #fff;
     border-radius: 4px;
     background-color: transparent;
@@ -183,20 +196,23 @@ main {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+/* MOBILE MENU CONTAINER */
 .header__menu {
     position: fixed;
-    top: 0;
+    top: calc(var(--admin-bar-height) + var(--header-height));
     right: -100%;
-    height: 100vh;
-    margin-top: 66px;
+    height: calc(100vh - var(--header-height) - var(--admin-bar-height));
     z-index: 100;
     background-color: #ff5d24;
     width: 100%;
     transition: right 0.3s ease;
+    overflow-y: auto;
 }
 
-body.admin-bar .header__menu {
-    margin-top: 112px;
+.header__menu ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .header__menu.active {
@@ -207,6 +223,7 @@ body.lock {
     overflow: hidden;
 }
 
+/* DESKTOP STYLES (Min-width: 768px) */
 @media (min-width: 768px) {
     .header__logo {
         display: none;
@@ -218,11 +235,11 @@ body.lock {
 
     .header__menu {
         position: static;
-        height: 66px;
+        height: auto;
         margin-top: 0px;
         z-index: 100;
         background-color: #ff5d24;
-        width: 100%;
+        width: auto;
     }
 
     .header__menu ul {
