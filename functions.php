@@ -53,6 +53,8 @@ function klimat_standart_theme_scripts()
 
     // Стандартний style.css (обов'язковий для WP)
     wp_enqueue_style('theme-style', get_stylesheet_uri());
+
+    wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.js', array(), null, true);
 }
 
 // =========================================================================
