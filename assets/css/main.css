@@ -98,6 +98,11 @@ main {
     height: inherit;
 }
 
+.header__logo {
+    width: 64px;
+    height: 64px;
+}
+
 .main-menu__list {
     color: #fff;
     text-transform: uppercase;
@@ -129,6 +134,48 @@ main {
     .header__logo {
         display: none;
     }
+}
+
+/* BURGER MENU */
+.burger {
+    display: block;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: transparent;
+    width: 44px;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+    z-index: 105;
+}
+
+.burger span, .burger::before, .burger::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background-color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+.burger span {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.burger::before {
+    top: 10px;
+}
+
+.burger::after {
+    bottom: 10px;
+}
+
+.header__menu {
+    display: none;
 }
 
 /* ABOUT */

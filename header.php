@@ -26,7 +26,7 @@
                     }
                     ?>
                 </div>
-
+                <button type="button" class="header__burger burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
                 <nav class="header__menu main-menu">
                     <?php
                     wp_nav_menu([
