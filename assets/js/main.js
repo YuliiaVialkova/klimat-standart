@@ -40,4 +40,23 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHeaderHeight();
 
   window.addEventListener("resize", updateHeaderHeight);
+
+  // === СЛАЙДЕР СЕРТИФІКАТІВ ===
+  if (document.querySelector(".glightbox")) {
+    const lightbox = GLightbox({
+      selector: ".glightbox",
+      touchNavigation: true,
+      loop: true,
+      zoomable: true,
+    });
+
+    // === ВИПРАВЛЕННЯ ПОМИЛКИ ARIA-HIDDEN ===
+    // Коли слайдер починає відкриватися...
+    lightbox.on("open", () => {
+      // ...ми примусово знімаємо фокус з натиснутого посилання
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    });
+  }
 });

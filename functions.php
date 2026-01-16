@@ -48,13 +48,21 @@ function klimat_standart_theme_setup()
 add_action('wp_enqueue_scripts', 'klimat_standart_theme_scripts');
 function klimat_standart_theme_scripts()
 {
-    // Основний файл стилів вашої верстки
+    // 1. СТИЛІ
+    // Спочатку стилі бібліотеки
+    wp_enqueue_style('glightbox-css', get_template_directory_uri() . '/assets/css/glightbox.min.css');
+    // Потім ваші стилі (щоб ви могли перебити їх, якщо треба)
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css');
-
-    // Стандартний style.css (обов'язковий для WP)
     wp_enqueue_style('theme-style', get_stylesheet_uri());
 
-    wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.js', array(), null, true);
+    // 2. СКРИПТИ
+    // Спочатку бібліотека
+    wp_enqueue_script('glightbox-js', get_template_directory_uri() . '/assets/js/glightbox.min.js', array(), null, true);
+
+    // ВАШ СКРИПТ
+    // array('glightbox-js') - це і є професійний секрет. 
+    // Це гарантує, що main.js запуститься ТІЛЬКИ ПІСЛЯ glightbox.
+    wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.js', array('glightbox-js'), null, true);
 }
 
 // =========================================================================
@@ -83,5 +91,26 @@ function crb_register_custom_fields()
 
             // Велике зображення (Зберігає ID картинки)
             Field::make('image', 'about_image', 'Зображення')
+        ));
+
+    Container::make('post_meta', 'Секція Послуги')
+        // Показувати ці поля тільки на тій сторінці, яка вибрана головною
+        ->where('post_id', '=', $front_page_id)
+
+        ->add_fields(array(
+
+            Field::make('rich_text', 'service_standards', 'Стандарти роботи (список)'),
+
+            Field::make('media_gallery', 'service_certificates', 'Сертифікати (галерея)'),
+
+            Field::make('complex', 'service_directions', 'Напрямки діяльності')
+                ->set_layout('tabbed-horizontal') // Вигляд в адмінці
+                ->add_fields(array(
+                    Field::make('image', 'dir_icon', 'Іконка'),
+                    Field::make('text', 'dir_title', 'Назва напрямку'),
+                    Field::make('text', 'dir_link', 'Посилання (URL)'),
+                ))
+                ->set_header_template('<%- dir_title %>') // Щоб в адмінці було видно назву
+
         ));
 }
