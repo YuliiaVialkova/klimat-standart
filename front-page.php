@@ -105,10 +105,23 @@
                                         // Отримуємо картинку іконки
                                         $icon_url = wp_get_attachment_image_url($item['dir_icon'], 'thumbnail');
                                 ?>
-                                        <a href="<?php echo $item['dir_link']; ?>" class="services-directions__item">
-                                            <?php if ($icon_url) : ?>
-                                                <img class="services-directions__icon" src="<?php echo $icon_url; ?>" alt="<?php echo $item['dir_title']; ?>">
-                                            <?php endif; ?>
+                                        <a href="<?php echo $item['dir_link']; ?>" class="services-directions__item scroll-item">
+                                            <div class="services-directions__icon-wrapper">
+                                                <?php
+                                                // Отримуємо шлях до файлу на сервері
+                                                $file_path = get_attached_file($item['dir_icon']);
+
+                                                // Перевіряємо, чи це SVG і чи файл існує
+                                                if (file_exists($file_path) && 'image/svg+xml' === get_post_mime_type($item['dir_icon'])) {
+                                                    // Виводимо код SVG прямо в HTML
+                                                    echo file_get_contents($file_path);
+                                                } elseif ($icon_url) {
+                                                    // Якщо це старий PNG, виводимо як раніше
+                                                    echo '<img src="' . $icon_url . '" alt="' . $item['dir_title'] . '">';
+                                                }
+                                                ?>
+                                            </div>
+
                                             <p class="services-directions__title"><?php echo $item['dir_title']; ?></p>
                                         </a>
                                 <?php endforeach;

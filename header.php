@@ -11,7 +11,7 @@
     <?php wp_body_open(); ?>
 
     <header class="header">
-        <div class="header__container container container--middle">
+        <div class="header__container container container--small">
             <div class="header__inner">
                 <div class="header__logo logo">
                     <?php

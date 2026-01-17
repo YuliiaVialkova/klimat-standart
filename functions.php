@@ -40,7 +40,15 @@ function klimat_standart_theme_setup()
     // !!! ВАЖЛИВО: Підтримка мініатюр (обкладинок) для статей блогу
     add_theme_support('post-thumbnails');
 }
-
+// Дозвіл на завантаження SVG
+function add_file_types_to_uploads($file_types)
+{
+    $new_filetypes = array();
+    $new_filetypes['svg'] = 'image/svg+xml';
+    $file_types = array_merge($file_types, $new_filetypes);
+    return $file_types;
+}
+add_filter('upload_mimes', 'add_file_types_to_uploads');
 // =========================================================================
 // 3. ПІДКЛЮЧЕННЯ СТИЛІВ ТА СКРИПТІВ
 // =========================================================================

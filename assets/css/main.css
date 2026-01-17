@@ -84,10 +84,8 @@ main {
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-    .container--middle {
-        max-width: 750px;
-    }
+.container--small {
+    max-width: 750px;
 }
 
 @media (min-width:1024px) {
@@ -273,13 +271,16 @@ body.lock {
         margin-top: 0px;
         z-index: 100;
         background-color: #ff5d24;
-        width: auto;
     }
 
     .header__menu ul {
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+    }
+
+    .main-menu__list li a {
+        padding: 25px 15px;
     }
 
     body.admin-bar .header__menu {
@@ -425,21 +426,41 @@ body.lock {
     padding: 0 30px;
 }
 
-.services-directions__icon {
+.services-directions__icon-wrapper {
     display: block;
     width: 124px;
     height: 109px;
     padding: 0 20px 25px;
     border-bottom: 1px solid #534743;
+    transition: borderBottom 0.2s ease;
+}
+
+.services-directions__icon-wrapper svg {
+    width: 100%;
+    height: auto;
+    max-height: 84px;
+    color: #534743;
+    transition: color 0.2s ease;
 }
 
 .services-directions__title {
+    color: #534743;
     text-align: center;
+    transition: color 0.2s ease;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+    .services-directions__item:hover .services-directions__icon-wrapper svg, .services-directions__item:hover .services-directions__title {
+        color: #ff5d24;
+    }
+
+    .services-directions__item:hover .services-directions__icon-wrapper {
+        border-bottom: 1px solid #ff5d24;
+    }
 }
 
 
-
-@media (min-width: 670px) {
+@media (min-width: 662px) {
     .certificates__gallery {
         justify-content: center;
     }
@@ -462,6 +483,10 @@ body.lock {
         gap: 15px;
     }
 
+    .certificates__gallery {
+        justify-content: start;
+    }
+
     .services__certificates, .services__standards {
         width: 49%;
     }
@@ -470,4 +495,8 @@ body.lock {
         width: 100%;
     }
 
+    .services-directions__list {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
