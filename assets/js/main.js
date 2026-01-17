@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.documentElement.style.setProperty(
       "--header-height",
-      `${height}px`
+      `${height}px`,
     );
   }
   updateHeaderHeight();
@@ -59,4 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // === АНІМАЦІЯ ПРИ СКРОЛІ ===
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.2,
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const scrollItems = document.querySelectorAll(".scroll-item");
+  scrollItems.forEach((item) => {
+    observer.observe(item);
+  });
 });
