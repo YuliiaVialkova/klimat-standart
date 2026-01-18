@@ -138,8 +138,23 @@
                 <div class="products__banner products-banner">
                     <div class="products-banner__container container container--middle">
                         <div class="products-banner__content">
-                            <?php echo wpautop(carbon_get_post_meta(get_the_ID(), 'products_logo')); ?>
-                            <?php echo wpautop(carbon_get_post_meta(get_the_ID(), 'products_banner')); ?>
+                            <?php
+                            // 1. Отримуємо ID картинок
+                            $logo_id = carbon_get_post_meta(get_the_ID(), 'products_logo');
+                            $banner_id = carbon_get_post_meta(get_the_ID(), 'products_banner');
+
+                            // 2. Отримуємо посилання (URL) на картинки
+                            $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
+                            $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
+                            ?>
+                            <?php if ($logo_url) : ?>
+                                <img src="<?php echo $logo_url; ?>" class="products-banner__logo" alt="Klimat Standart Logo">
+                            <?php endif; ?>
+                            <?php if ($banner_url) : ?>
+                                <img src="<?php echo $banner_url; ?>" class="products-banner__bg" alt="Products Banner">
+                            <?php endif; ?>
+
+
                         </div>
                     </div>
                 </div>

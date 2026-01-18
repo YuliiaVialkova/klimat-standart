@@ -604,7 +604,27 @@ body.lock {
     }
 
     .products-banner__content {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
         padding: 70px 0;
+        gap: 30px;
+    }
+
+    .products-banner__logo {
+        height: 180px;
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .products-banner__bg {
+        object-fit: contain;
+        width: auto;
+        max-width: 100%;
+        min-width: 0;
+        display: block;
+        flex-shrink: 1;
     }
 
     .product-list__content {

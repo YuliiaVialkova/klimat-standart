@@ -128,7 +128,7 @@ function crb_register_custom_fields()
         ->add_fields(array(
             Field::make('image', 'products_logo', 'Логотип'),
 
-            Field::make('rich_text', 'products_banner', 'баннер секції Продукція'),
+            Field::make('image', 'products_banner', 'баннер секції Продукція'),
 
             Field::make('complex', 'products_items', 'Види продукції')
                 ->set_layout('tabbed-horizontal') // Вигляд в адмінці
