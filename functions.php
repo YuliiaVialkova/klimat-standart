@@ -121,4 +121,23 @@ function crb_register_custom_fields()
                 ->set_header_template('<%- dir_title %>') // Щоб в адмінці було видно назву
 
         ));
+    Container::make('post_meta', 'Секція Продукція')
+        // Показувати ці поля тільки на тій сторінці, яка вибрана головною
+        ->where('post_id', '=', $front_page_id)
+
+        ->add_fields(array(
+            Field::make('image', 'products_logo', 'Логотип'),
+
+            Field::make('rich_text', 'products_banner', 'баннер секції Продукція'),
+
+            Field::make('complex', 'products_items', 'Види продукції')
+                ->set_layout('tabbed-horizontal') // Вигляд в адмінці
+                ->add_fields(array(
+                    Field::make('image', 'prod_icon', 'Іконка'),
+                    Field::make('text', 'prod_title', 'Назва напрямку'),
+                    Field::make('text', 'prod_link', 'Посилання (URL)'),
+                ))
+                ->set_header_template('<%- prod_title %>') // Щоб в адмінці було видно назву
+
+        ));
 }

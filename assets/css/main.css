@@ -449,7 +449,7 @@ body.lock {
     transition: color 0.2s ease;
 }
 
-/* === АНІМАЦІЯ ПОЯВИ (Scroll Reveal) === */
+/* === АНІМАЦІЯ ПОЯВИ секції Послуги (Scroll Reveal) === */
 
 .scroll-item {
     opacity: 0;
@@ -527,5 +527,90 @@ body.lock {
     .services-directions__list {
         grid-auto-flow: row;
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* PRODUCTS */
+
+.products__banner {
+    display: none;
+}
+
+.product-list__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0 30px;
+}
+
+.products__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.25rem;
+    font-weight: 700;
+    width: 300px;
+    cursor: pointer;
+}
+
+.products__icon-wrapper {
+    width: 140px;
+    height: 125px;
+    padding: 0 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products__icon-wrapper svg {
+    width: auto;
+    height: 100%;
+    max-height: 100px;
+    object-fit: cover;
+    color: #534743;
+    transition: color 0.3s ease;
+}
+
+.products__icon-wrapper img {
+    width: auto;
+    height: 100%;
+    max-height: 75px;
+    object-fit: cover;
+}
+
+.products__title {
+    text-transform: uppercase;
+    color: #534743;
+    margin: 20px 0;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+    .products__item:hover .products__icon-wrapper svg {
+        color: #ff5d24;
+    }
+
+    .products__item:hover .products__title {
+        color: #ff5d24;
+    }
+}
+
+@media (min-width: 768px) {
+    .products__banner {
+        display: block;
+        background-color: #c9d4ea;
+    }
+
+    .products-banner__content {
+        padding: 70px 0;
+    }
+
+    .product-list__content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: start;
     }
 }

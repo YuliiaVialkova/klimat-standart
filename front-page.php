@@ -6,7 +6,7 @@
             <section id="about" class="about">
                 <div class="about__container container container--middle">
                     <div class="about__content">
-
+                        <h2 class="visually-hidden">Про компанію</h2>
                         <?php
                         // === 1. ЛОГОТИП СЕКЦІЇ ===
                         // Отримуємо ID картинки через carbon_get_post_meta (бо це мета-поля поста/сторінки)
@@ -54,6 +54,7 @@
             <section id="services" class="services">
                 <div class="services__container container container--middle">
                     <div class="services__content">
+                        <h2 class="visually-hidden">Послуги</h2>
                         <div class="services__standards">
                             <h3 class="visually-hidden">Стандарти роботи</h3>
                             <div class="services__list">
@@ -128,6 +129,48 @@
                                 endif;
                                 ?>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="products" class="products">
+                <h2 class="visually-hidden">Продукція</h2>
+                <div class="products__banner products-banner">
+                    <div class="products-banner__container container container--middle">
+                        <div class="products-banner__content">
+                            <?php echo wpautop(carbon_get_post_meta(get_the_ID(), 'products_logo')); ?>
+                            <?php echo wpautop(carbon_get_post_meta(get_the_ID(), 'products_banner')); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="products__list products-list">
+                    <div class="products-list__container container container--middle">
+                        <div class="product-list__content">
+                            <?php
+                            $prod_items = carbon_get_post_meta(get_the_ID(), 'products_items');
+                            if (!empty($prod_items)) :
+                                foreach ($prod_items as $item) :
+                                    // Отримуємо URL звичайної картинки (про всяк випадок)
+                                    $icon_url = wp_get_attachment_image_url($item['prod_icon'], 'thumbnail');
+                                    // Шлях до файлу для SVG
+                                    $file_path = get_attached_file($item['prod_icon']);
+                            ?>
+                                    <a class="products__item scroll-item">
+                                        <div class="products__icon-wrapper">
+                                            <?php
+                                            // Логіка для SVG (як у попередній секції)
+                                            if (file_exists($file_path) && 'image/svg+xml' === get_post_mime_type($item['prod_icon'])) {
+                                                echo file_get_contents($file_path);
+                                            } elseif ($icon_url) {
+                                                echo '<img src="' . $icon_url . '" alt="' . $item['prod_title'] . '">';
+                                            }
+                                            ?>
+                                        </div>
+                                        <p class="products__title"><?php echo $item['prod_title']; ?></p>
+                                    </a>
+                            <?php endforeach;
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
