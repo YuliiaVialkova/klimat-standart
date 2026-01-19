@@ -141,3 +141,53 @@ function crb_register_custom_fields()
 
         ));
 }
+
+// Реєстрація типу запису "Наші роботи"
+add_action('init', 'register_works_post_type');
+function register_works_post_type()
+{
+    register_post_type('klimat_works', array(
+        'labels' => array(
+            'name'               => 'Наші роботи', // Назва в меню
+            'singular_name'      => 'Об\'єкт',
+            'add_new'            => 'Додати об\'єкт',
+            'add_new_item'       => 'Додати новий об\'єкт',
+            'edit_item'          => 'Редагувати об\'єкт',
+            'new_item'           => 'Новий об\'єкт',
+            'view_item'          => 'Переглянути об\'єкт',
+            'search_items'       => 'Шукати об\'єкти',
+            'not_found'          => 'Об\'єктів не знайдено',
+        ),
+        'public'             => true, // Доступний публічно
+        'has_archive'        => true, // Можна виводити список
+        'menu_icon'          => 'dashicons-building', // Іконка будинку
+        'supports'           => array('title', 'thumbnail'), // Підтримка: Заголовок, Мініатюра (головне фото)
+        'rewrite'            => array('slug' => 'projects'), // Частина URL: site.com/projects/nazva
+    ));
+}
+add_action('carbon_fields_register_fields', 'crb_register_works_fields');
+function crb_register_works_fields()
+{
+    Container::make('post_meta', 'Конструктор сторінки')
+        ->where('post_type', '=', 'klimat_works') // Показувати ТІЛЬКИ в "Наші роботи"
+
+        ->add_fields(array(
+            Field::make('complex', 'work_content', 'Вміст сторінки')
+                ->set_layout('tabbed-vertical')
+
+                // Блок 1: Просто текст
+                ->add_fields('text_block', 'Текстовий блок', array(
+                    Field::make('rich_text', 'text_content', 'Текст')
+                ))
+
+                // Блок 2: Одне велике зображення
+                ->add_fields('image_block', 'Одне фото', array(
+                    Field::make('image', 'single_image', 'Зображення')
+                ))
+
+                // Блок 3: Галерея (багато картинок)
+                ->add_fields('gallery_block', 'Галерея', array(
+                    Field::make('media_gallery', 'gallery_images', 'Фотографії')
+                ))
+        ));
+}

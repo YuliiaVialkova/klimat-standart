@@ -170,7 +170,7 @@
                                     // Шлях до файлу для SVG
                                     $file_path = get_attached_file($item['prod_icon']);
                             ?>
-                                    <a class="products__item scroll-item">
+                                    <a href="<?php echo $item['prod_link']; ?>" class="products__item scroll-item">
                                         <div class="products__icon-wrapper">
                                             <?php
                                             // Логіка для SVG (як у попередній секції)
@@ -187,6 +187,48 @@
                             endif;
                             ?>
                         </div>
+                    </div>
+                </div>
+            </section>
+            <section id="projects" class="projects">
+                <div class="container container--middle">
+                    <h2 class="projects__title">Наші роботи</h2>
+
+                    <div class="projects__list">
+                        <?php
+                        // Робимо запит до бази даних: "Дай мені 3 останні роботи"
+                        $works_query = new WP_Query(array(
+                            'post_type'      => 'klimat_works',
+                            'posts_per_page' => 3, // Кількість карток
+                            'order'          => 'DESC',
+                            'orderby'        => 'date'
+                        ));
+
+                        if ($works_query->have_posts()) :
+                            while ($works_query->have_posts()) : $works_query->the_post();
+                                // Отримуємо посилання на картинку (Мініатюра запису)
+                                $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                        ?>
+
+                                <div class="projects__item">
+                                    <div class="projects__image">
+                                        <?php if ($thumb_url) : ?>
+                                            <img src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>">
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <h3 class="projects__name"><?php the_title(); ?></h3>
+
+                                    <a href="<?php the_permalink(); ?>" class="projects__link">Детально</a>
+                                </div>
+
+                        <?php
+                            endwhile;
+                            wp_reset_postdata(); // Обов'язково скидаємо запит після циклу!
+                        else :
+                            echo '<p>Роботи ще не додані.</p>';
+                        endif;
+                        ?>
                     </div>
                 </div>
             </section>
