@@ -16,6 +16,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/open-sans-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Global reset */
 
 *,
@@ -145,6 +153,14 @@ main {
 .header__logo img {
     max-height: 66px;
     width: auto;
+}
+
+.logo__text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
 }
 
 .main-menu__list {
@@ -632,5 +648,199 @@ body.lock {
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: start;
+    }
+}
+
+/* === СТОРІНКА ОДНОГО ОБ'ЄКТУ (Single Work) === */
+
+.single-work {
+    padding: 60px 0;
+}
+
+.single-work__title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #333;
+    text-align: center;
+    /* Центруємо заголовок */
+}
+
+.single-work__content {
+    max-width: 800px;
+    /* Обмежуємо ширину тексту, щоб було зручно читати */
+    margin: 0 auto;
+    /* Центруємо блок контенту */
+}
+
+/* Відступи між блоками конструктора */
+.work-block {
+    margin-bottom: 40px;
+}
+
+/* Текстовий блок */
+.work-block--text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.work-block--text p {
+    margin-bottom: 20px;
+}
+
+/* Блок з одним фото */
+.work-block--image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Блок галереї (Сітка) */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 колонки на мобільному */
+    gap: 15px;
+}
+
+.gallery-grid a {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 200px;
+    /* Фіксована висота для акуратності */
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Картинка заповнює квадрат, не спотворюючись */
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid a:hover img {
+    transform: scale(1.05);
+    /* Легкий зум при наведенні */
+}
+
+/* Адаптив для галереї (на ПК 3 колонки) */
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery-grid a {
+        height: 250px;
+    }
+}
+
+/* === СЕКЦІЯ НАШІ РОБОТИ === */
+.projects__banner, .projects__aside {
+    display: none;
+}
+
+.projects__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.projects__list a {
+    width: 80%;
+    background-color: #e9e9e9;
+    border: 1px solid #dadbda;
+    padding: 20px 5px 8px;
+    margin: 12px 0;
+}
+
+.projects__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.projects__name {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 0.875rem;
+    line-height: 1.42;
+    color: #534743;
+}
+
+.projects__button {
+    font-size: 0.8125rem;
+    line-height: 1.15;
+    color: #534743;
+    font-weight: 600;
+    margin-top: 55px;
+}
+
+.projects__image {
+    width: 205px;
+    height: 95px;
+    position: relative;
+}
+
+.projects__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.projects__image::after {
+    content: '';
+    width: 75px;
+    height: 1px;
+    background-color: #5B4E4C;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.projects__image::before {
+    content: '';
+    width: 75px;
+    height: 1px;
+    background-color: #5B4E4C;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: backgroundColor 0.3s ease;
+}
+
+.projects__footer {
+    text-align: center;
+    margin: 32px 0;
+}
+
+.projects-footer__button {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #534743;
+    background-color: #e9e9e9;
+    border: 1px solid #dadbda;
+    padding: 10px 5px;
+
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+    .projects__link:hover .projects__image::after, .projects__link:hover .projects__image::before {
+        background-color: #ff5d24;
+    }
+}
+
+@media (min-width: 768px) {
+    .projects__banner, .projects__aside {
+        display: block;
     }
 }

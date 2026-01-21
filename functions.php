@@ -140,6 +140,20 @@ function crb_register_custom_fields()
                 ->set_header_template('<%- prod_title %>') // Щоб в адмінці було видно назву
 
         ));
+
+
+
+    Container::make('post_meta', 'Секція Наші Роботи (Банери)')
+        ->where('post_id', '=', $front_page_id)
+        ->add_fields(array(
+            // Банер зверху
+            Field::make('image', 'projects-banner_logo', 'Верхній банер: Лого'),
+            Field::make('image', 'projects-banner_img', 'Верхній банер: Фон'),
+
+            // Банер збоку (Aside)
+            Field::make('image', 'projects-aside_logo', 'Боковий банер: Лого'),
+            Field::make('image', 'projects-aside_img', 'Боковий банер: Фон'),
+        ));
 }
 
 // Реєстрація типу запису "Наші роботи"

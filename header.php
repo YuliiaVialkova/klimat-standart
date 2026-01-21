@@ -15,16 +15,18 @@
             <div class="header__inner">
                 <div class="header__logo logo">
                     <?php
-                    if (has_custom_logo()) {
-                        the_custom_logo();
-                    } else {
+                    // Отримуємо ID логотипу з налаштувань теми (Вигляд -> Налаштувати)
+                    $custom_logo_id = get_theme_mod('custom_logo');
+                    $logo_url = wp_get_attachment_image_url($custom_logo_id, 'full');
                     ?>
-                        <a href="<?php echo home_url(); ?>">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Klimat Standart">
-                        </a>
-                    <?php
-                    }
-                    ?>
+
+                    <a href="<?php echo home_url(); ?>">
+                        <?php if ($logo_url) : ?>
+                            <img src="<?php echo $logo_url; ?>" alt="<?php bloginfo('name'); ?>">
+                        <?php else : ?>
+                            <span class="logo__text"><?php bloginfo('name'); ?></span>
+                        <?php endif; ?>
+                    </a>
                 </div>
                 <button type="button" class="header__burger burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
                 <nav class="header__menu main-menu">

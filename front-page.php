@@ -191,44 +191,87 @@
                 </div>
             </section>
             <section id="projects" class="projects">
-                <div class="container container--middle">
-                    <h2 class="projects__title">Наші роботи</h2>
+                <h2 class="visually-hidden">Наші роботи</h2>
+                <div class="projects__banner projects-banner">
+                    <div class="projects-banner__container container container--middle">
+                        <div class="projects-banner__content">
+                            <?php
+                            // 1. Отримуємо ID картинок
+                            $logo_id = carbon_get_post_meta(get_the_ID(), 'projects-banner_logo');
+                            $banner_id = carbon_get_post_meta(get_the_ID(), 'projects-banner_img');
 
-                    <div class="projects__list">
-                        <?php
-                        // Робимо запит до бази даних: "Дай мені 3 останні роботи"
-                        $works_query = new WP_Query(array(
-                            'post_type'      => 'klimat_works',
-                            'posts_per_page' => 3, // Кількість карток
-                            'order'          => 'DESC',
-                            'orderby'        => 'date'
-                        ));
+                            // 2. Отримуємо посилання (URL) на картинки
+                            $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
+                            $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
+                            ?>
+                            <?php if ($logo_url) : ?>
+                                <img src="<?php echo $logo_url; ?>" class="projects-banner__logo" alt="Klimat Standart Logo">
+                            <?php endif; ?>
+                            <?php if ($banner_url) : ?>
+                                <img src="<?php echo $banner_url; ?>" class="projects-banner__img" alt="projects banner">
+                            <?php endif; ?>
 
-                        if ($works_query->have_posts()) :
-                            while ($works_query->have_posts()) : $works_query->the_post();
-                                // Отримуємо посилання на картинку (Мініатюра запису)
-                                $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-                        ?>
 
-                                <div class="projects__item">
-                                    <div class="projects__image">
-                                        <?php if ($thumb_url) : ?>
-                                            <img src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>">
-                                        <?php endif; ?>
-                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects__content container container--middle">
+                    <div class="projects__wrapper">
+                        <div class="projects__aside projects-aside">
+                            <div class="projects-aside__content">
+                                <?php
+                                // 1. Отримуємо ID картинок
+                                $logo_id = carbon_get_post_meta(get_the_ID(), 'projects-aside_logo');
+                                $banner_id = carbon_get_post_meta(get_the_ID(), 'projects-aside_img');
+                                // 2. Отримуємо посилання (URL) на картинки
+                                $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
+                                $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
+                                ?>
+                                <?php if ($logo_url) : ?>
+                                    <img src="<?php echo $logo_url; ?>" class="projects-aside__logo" alt="Klimat Standart Logo">
+                                <?php endif; ?>
+                                <?php if ($banner_url) : ?>
+                                    <img src="<?php echo $banner_url; ?>" class="projects-aside__img" alt="projects banner">
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="projects__list">
+                            <?php
+                            // Робимо запит до бази даних: "Дай мені 3 останні роботи"
+                            $works_query = new WP_Query(array(
+                                'post_type'      => 'klimat_works',
+                                'posts_per_page' => 8, // Кількість карток
+                                'order'          => 'DESC',
+                                'orderby'        => 'date'
+                            ));
+                            if ($works_query->have_posts()) :
+                                while ($works_query->have_posts()) : $works_query->the_post();
+                                    // Отримуємо посилання на картинку (Мініатюра запису)
+                                    $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                            ?>
+                                    <a href="<?php the_permalink(); ?>" class="projects__link">
+                                        <h3 class="projects__name"><?php the_title(); ?></h3>
+                                        <div class="projects__image">
+                                            <?php if ($thumb_url) : ?>
+                                                <img src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>">
+                                            <?php endif; ?>
+                                        </div>
 
-                                    <h3 class="projects__name"><?php the_title(); ?></h3>
-
-                                    <a href="<?php the_permalink(); ?>" class="projects__link">Детально</a>
-                                </div>
-
-                        <?php
-                            endwhile;
-                            wp_reset_postdata(); // Обов'язково скидаємо запит після циклу!
-                        else :
-                            echo '<p>Роботи ще не додані.</p>';
-                        endif;
-                        ?>
+                                        <p class="projects__button">Детальніше</p>
+                                    </a>
+                            <?php
+                                endwhile;
+                                wp_reset_postdata(); // Обов'язково скидаємо запит після циклу!
+                            else :
+                                echo '<p>Роботи ще не додані.</p>';
+                            endif;
+                            ?>
+                        </div>
+                        <div class="projects__footer projects-footer">
+                            <a href="<?php echo get_post_type_archive_link('klimat_works'); ?>" class="projects-footer__button">
+                                Показати всі
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

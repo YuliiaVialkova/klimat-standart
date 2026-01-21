@@ -38,8 +38,8 @@
                                     $photo_url = wp_get_attachment_image_url($photo_id, 'large');
                                     $full_url = wp_get_attachment_image_url($photo_id, 'full');
                     ?>
-                                    <a href="<?php echo $full_url; ?>" class="glightbox">
-                                        <img src="<?php echo $photo_url; ?>" alt="Галерея">
+                                    <a href="<?php echo $full_url; ?>" class="glightbox" data-gallery="post-gallery">
+                                        <img src="<?php echo $photo_url; ?>" alt="Галерея об'єкту">
                                     </a>
                     <?php
                                 }
