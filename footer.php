@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer id="contacts" class="footer">
     <div class="footer__container container container--middle">
         <div class="footer__content">
 

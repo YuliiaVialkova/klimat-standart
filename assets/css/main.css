@@ -332,8 +332,13 @@ body.lock {
 }
 
 .about__logo {
+    display: block;
     margin: 70px 0 20px;
     width: 200px;
+}
+
+.about__logo img {
+    width: 100%;
     height: auto;
 }
 
@@ -643,9 +648,16 @@ body.lock {
     }
 
     .products-banner__logo {
+        display: block;
         height: 180px;
         width: auto;
         flex-shrink: 0;
+    }
+
+    .products-banner__logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .products-banner__bg {
@@ -782,6 +794,13 @@ body.lock {
     .projects-banner__logo {
         flex-shrink: 0;
         max-width: 180px;
+        display: block;
+    }
+
+    .projects-banner__logo img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 
     .projects-banner__img {
@@ -795,7 +814,7 @@ body.lock {
 
 @media (min-width: 1024px) {
     .projects-banner__content {
-        padding: 60px;
+        padding: 60px 0;
     }
 }
 
@@ -841,9 +860,16 @@ body.lock {
     }
 
     .projects-aside__logo {
+        display: block;
         flex-shrink: 0;
         max-width: 180px;
         margin: 20px;
+    }
+
+    .projects-aside__logo img {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
     .projects-aside__img {
@@ -1014,16 +1040,17 @@ body.lock {
 .footer__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    row-gap: 30px;
+    padding-block: 50px;
 }
 
 .footer__contacts {
     color: #534743;
     font-weight: 600;
-    padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: start;
+    align-self: center;
 }
 
 .footer-contacts__link {
@@ -1033,9 +1060,33 @@ body.lock {
 
 .footer__logo {
     max-width: 180px;
+    align-self: center;
 }
 
 .footer__map iframe {
     width: 100%;
     height: 300px;
+}
+
+@media (min-width: 768px) {
+    .footer__content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 30px;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .footer__map {
+        width: 100%;
+        order: 3;
+    }
+
+    .footer__logo {
+        order: 1;
+    }
+
+    .footer__contacts {
+        order: 2;
+    }
 }

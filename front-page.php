@@ -16,7 +16,9 @@
                         ?>
 
                         <?php if ($logo_url) : ?>
-                            <img src="<?php echo $logo_url; ?>" class="about__logo" alt="Logo Klimat Standart">
+                            <a href="<?php echo home_url(); ?>" class="about__logo">
+                                <img src="<?php echo $logo_url; ?>" alt="Logo Klimat Standart">
+                            </a>
                         <?php endif; ?>
 
                         <?php
@@ -148,7 +150,9 @@
                             $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
                             ?>
                             <?php if ($logo_url) : ?>
-                                <img src="<?php echo $logo_url; ?>" class="products-banner__logo" alt="Klimat Standart Logo">
+                                <a href="<?php echo home_url(); ?>" class="products-banner__logo">
+                                    <img src="<?php echo $logo_url; ?>" alt="Klimat Standart Logo">
+                                </a>
                             <?php endif; ?>
                             <?php if ($banner_url) : ?>
                                 <img src="<?php echo $banner_url; ?>" class="products-banner__bg" alt="Products Banner">
@@ -205,7 +209,9 @@
                             $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
                             ?>
                             <?php if ($logo_url) : ?>
-                                <img src="<?php echo $logo_url; ?>" class="projects-banner__logo" alt="Klimat Standart Logo">
+                                <a href="<?php echo home_url(); ?>" class="projects-banner__logo">
+                                    <img src="<?php echo $logo_url; ?>" alt="Klimat Standart Logo">
+                                </a>
                             <?php endif; ?>
                             <?php if ($banner_url) : ?>
                                 <img src="<?php echo $banner_url; ?>" class="projects-banner__img" alt="projects banner">
@@ -228,7 +234,9 @@
                                 $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
                                 ?>
                                 <?php if ($logo_url) : ?>
-                                    <img src="<?php echo $logo_url; ?>" class="projects-aside__logo" alt="Klimat Standart Logo">
+                                    <a href="<?php echo home_url(); ?>" class="projects-aside__logo">
+                                        <img src="<?php echo $logo_url; ?>" alt="Klimat Standart Logo">
+                                    </a>
                                 <?php endif; ?>
                                 <?php if ($banner_url) : ?>
                                     <img src="<?php echo $banner_url; ?>" class="projects-aside__img" alt="projects banner">
