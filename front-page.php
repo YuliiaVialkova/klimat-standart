@@ -215,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="projects__content container container--middle">
+                <div class="projects__container">
                     <div class="projects__wrapper">
                         <div class="projects__aside projects-aside">
                             <div class="projects-aside__content">
@@ -235,44 +235,47 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="projects__list">
-                            <?php
-                            // Робимо запит до бази даних: "Дай мені 3 останні роботи"
-                            $works_query = new WP_Query(array(
-                                'post_type'      => 'klimat_works',
-                                'posts_per_page' => 8, // Кількість карток
-                                'order'          => 'DESC',
-                                'orderby'        => 'date'
-                            ));
-                            if ($works_query->have_posts()) :
-                                while ($works_query->have_posts()) : $works_query->the_post();
-                                    // Отримуємо посилання на картинку (Мініатюра запису)
-                                    $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
-                            ?>
-                                    <a href="<?php the_permalink(); ?>" class="projects__link">
-                                        <h3 class="projects__name"><?php the_title(); ?></h3>
-                                        <div class="projects__image">
-                                            <?php if ($thumb_url) : ?>
-                                                <img src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>">
-                                            <?php endif; ?>
-                                        </div>
+                        <div class="projects__list-wrapper">
+                            <div class="projects__list">
+                                <?php
+                                // Робимо запит до бази даних: "Дай мені 3 останні роботи"
+                                $works_query = new WP_Query(array(
+                                    'post_type'      => 'klimat_works',
+                                    'posts_per_page' => 8, // Кількість карток
+                                    'order'          => 'DESC',
+                                    'orderby'        => 'date'
+                                ));
+                                if ($works_query->have_posts()) :
+                                    while ($works_query->have_posts()) : $works_query->the_post();
+                                        // Отримуємо посилання на картинку (Мініатюра запису)
+                                        $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                                ?>
+                                        <a href="<?php the_permalink(); ?>" class="projects__link">
+                                            <h3 class="projects__name"><?php the_title(); ?></h3>
+                                            <div class="projects__image">
+                                                <?php if ($thumb_url) : ?>
+                                                    <img src="<?php echo $thumb_url; ?>" alt="<?php the_title(); ?>">
+                                                <?php endif; ?>
+                                            </div>
+                                            <p class="projects__button">Детальніше</p>
+                                        </a>
+                                <?php
+                                    endwhile;
+                                    wp_reset_postdata(); // Обов'язково скидаємо запит після циклу!
+                                else :
+                                    echo '<p>Роботи ще не додані.</p>';
+                                endif;
+                                ?>
+                            </div>
+                            <div class="projects__footer projects-footer">
+                                <a href="<?php echo get_post_type_archive_link('klimat_works'); ?>" class="projects-footer__button">
+                                    Показати всі
+                                </a>
+                            </div>
+                        </div>
 
-                                        <p class="projects__button">Детальніше</p>
-                                    </a>
-                            <?php
-                                endwhile;
-                                wp_reset_postdata(); // Обов'язково скидаємо запит після циклу!
-                            else :
-                                echo '<p>Роботи ще не додані.</p>';
-                            endif;
-                            ?>
-                        </div>
-                        <div class="projects__footer projects-footer">
-                            <a href="<?php echo get_post_type_archive_link('klimat_works'); ?>" class="projects-footer__button">
-                                Показати всі
-                            </a>
-                        </div>
                     </div>
+
                 </div>
             </section>
     <?php endwhile;

@@ -155,8 +155,10 @@ function crb_register_custom_fields()
             Field::make('image', 'projects-aside_img', 'Боковий банер: Фон'),
         ));
 }
+// =========================================================================
+// 5 Реєстрація типу запису "Наші роботи"
+// =========================================================================
 
-// Реєстрація типу запису "Наші роботи"
 add_action('init', 'register_works_post_type');
 function register_works_post_type()
 {
@@ -203,5 +205,24 @@ function crb_register_works_fields()
                 ->add_fields('gallery_block', 'Галерея', array(
                     Field::make('media_gallery', 'gallery_images', 'Фотографії')
                 ))
+        ));
+}
+// =========================================================================
+// 6. ГЛОБАЛЬНІ НАЛАШТУВАННЯ ТЕМИ (Футер, Контакти)
+// =========================================================================
+
+add_action('carbon_fields_register_fields', 'crb_register_theme_options');
+function crb_register_theme_options()
+{
+    // Тут ми прибрали \Carbon_Fields\ перед Container, бо він підключений зверху
+    Container::make('theme_options', 'Налаштування сайту')
+        ->add_fields(array(
+            // І тут прибрали перед Field
+            Field::make('rich_text', 'footer_address', 'Адреса (Текст)'),
+            Field::make('text', 'footer_phone', 'Телефон'),
+            Field::make('text', 'footer_email', 'Email'),
+            Field::make('image', 'footer_logo', 'Логотип у футері'),
+            Field::make('textarea', 'footer_map', 'Код карти Google (Iframe)')
+                ->set_attribute('placeholder', 'Вставте сюди код <iframe>...'),
         ));
 }
