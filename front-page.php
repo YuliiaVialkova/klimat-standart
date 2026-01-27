@@ -105,21 +105,30 @@
                                 $directions = carbon_get_post_meta(get_the_ID(), 'service_directions');
                                 if (!empty($directions)) :
                                     foreach ($directions as $item) :
-                                        // Отримуємо картинку іконки
+                                        // 1. Отримуємо іконку
                                         $icon_url = wp_get_attachment_image_url($item['dir_icon'], 'thumbnail');
+                                        $file_path = get_attached_file($item['dir_icon']);
+
+                                        // 2. ОТРИМУЄМО ПОСИЛАННЯ (Логіка для Association Field)
+                                        $link_url = '#'; // Заглушка, якщо сторінку не вибрано
+
+                                        // Перевіряємо, чи вибрана сторінка в адмінці
+                                        if (!empty($item['dir_page'])) {
+                                            // Association повертає масив, беремо перший елемент
+                                            $page_data = $item['dir_page'][0];
+                                            // Отримуємо ID вибраної сторінки
+                                            $page_id = $page_data['id'];
+                                            // Отримуємо посилання на цю сторінку за її ID
+                                            $link_url = get_permalink($page_id);
+                                        }
                                 ?>
-                                        <a href="<?php echo $item['dir_link']; ?>" class="services-directions__item scroll-item">
+                                        <a href="<?php echo $link_url; ?>" class="services-directions__item scroll-item">
+
                                             <div class="services-directions__icon-wrapper">
                                                 <?php
-                                                // Отримуємо шлях до файлу на сервері
-                                                $file_path = get_attached_file($item['dir_icon']);
-
-                                                // Перевіряємо, чи це SVG і чи файл існує
                                                 if (file_exists($file_path) && 'image/svg+xml' === get_post_mime_type($item['dir_icon'])) {
-                                                    // Виводимо код SVG прямо в HTML
                                                     echo file_get_contents($file_path);
                                                 } elseif ($icon_url) {
-                                                    // Якщо це старий PNG, виводимо як раніше
                                                     echo '<img src="' . $icon_url . '" alt="' . $item['dir_title'] . '">';
                                                 }
                                                 ?>

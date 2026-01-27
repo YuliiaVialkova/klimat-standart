@@ -684,27 +684,23 @@ body.lock {
 }
 
 .single-work__title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: #333;
+    font-size: 1.875rem;
+    font-weight: 500;
+    padding: 20px 0;
     text-align: center;
-    /* Центруємо заголовок */
+    text-transform: uppercase;
+    margin-bottom: 40px;
 }
 
 .single-work__content {
     max-width: 800px;
-    /* Обмежуємо ширину тексту, щоб було зручно читати */
     margin: 0 auto;
-    /* Центруємо блок контенту */
 }
 
-/* Відступи між блоками конструктора */
 .work-block {
     margin-bottom: 40px;
 }
 
-/* Текстовий блок */
 .work-block--text {
     font-size: 16px;
     line-height: 1.6;
@@ -715,44 +711,35 @@ body.lock {
     margin-bottom: 20px;
 }
 
-/* Блок з одним фото */
 .work-block--image img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
     display: block;
 }
 
-/* Блок галереї (Сітка) */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 колонки на мобільному */
     gap: 15px;
 }
 
 .gallery-grid a {
     display: block;
     overflow: hidden;
-    border-radius: 8px;
     height: 200px;
-    /* Фіксована висота для акуратності */
 }
 
 .gallery-grid img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Картинка заповнює квадрат, не спотворюючись */
     transition: transform 0.3s ease;
 }
 
 .gallery-grid a:hover img {
     transform: scale(1.05);
-    /* Легкий зум при наведенні */
 }
 
-/* Адаптив для галереї (на ПК 3 колонки) */
 @media (min-width: 768px) {
     .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1089,4 +1076,23 @@ body.lock {
     .footer__contacts {
         order: 2;
     }
+}
+
+/* === СТОРІНКИ РОЗДІЛУ ПОСЛУГИ ТА ПРОДУКЦІЯ === */
+.default-page {
+    padding: 60px 0;
+}
+
+.default-page__title {
+    font-size: 1.875rem;
+    font-weight: 500;
+    padding: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.default-page__content {
+    max-width: 800px;
+    margin: 0 auto;
 }

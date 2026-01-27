@@ -116,7 +116,14 @@ function crb_register_custom_fields()
                 ->add_fields(array(
                     Field::make('image', 'dir_icon', 'Іконка'),
                     Field::make('text', 'dir_title', 'Назва напрямку'),
-                    Field::make('text', 'dir_link', 'Посилання (URL)'),
+                    Field::make('association', 'dir_page', 'Виберіть сторінку')
+                        ->set_types(array(
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'page', // Дозволяємо вибирати тільки Сторінки
+                            )
+                        ))
+                        ->set_max(1), // Можна вибрати тільки одну сторінку
                 ))
                 ->set_header_template('<%- dir_title %>') // Щоб в адмінці було видно назву
 
@@ -186,6 +193,7 @@ function crb_register_works_fields()
 {
     Container::make('post_meta', 'Конструктор сторінки')
         ->where('post_type', '=', 'klimat_works') // Показувати ТІЛЬКИ в "Наші роботи"
+        ->or_where('post_type', '=', 'page')      // <--- ДОДАЛИ: Для звичайних сторінок
 
         ->add_fields(array(
             Field::make('complex', 'work_content', 'Вміст сторінки')
